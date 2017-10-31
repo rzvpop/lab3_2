@@ -18,9 +18,12 @@ def printAll(l):
         I: l
     '''
     s=""
-    for x in l:
-        s+=str(x)+"\n"
-    print(s)
+    if len(l) > 0:
+        for x in l:
+            s+=str(x)+"\n"
+        print(s)
+    else:
+        print("Empty list.")
 
 def isFloat(x):
     '''

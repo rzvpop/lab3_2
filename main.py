@@ -30,7 +30,6 @@ def run():
 
                 if cmd[0] in ["add", "insert", "remove", "replace", "filter"]:
                     add(undo_lst, deepcopy(lst))
-
             except ValueError as ve:
                 print(ve)
         else:

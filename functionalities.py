@@ -27,6 +27,14 @@ def findTransactions(l, params):
 
     return l_found
 
+def removeFiltred(l, l_filter):
+    i = 0
+    while i < len(l):
+        if l[i] not in l_filter:
+            remove(l, l[i])
+        else:
+            i = i + 1
+
 def balance(l, d):
     '''
         Computes the balance of an account until the given day.

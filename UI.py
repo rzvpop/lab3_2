@@ -1,7 +1,7 @@
 from datetime import datetime
 from copy import deepcopy
-from functionalities import addTransaction, printList, findTransactions, remove
-from utils import isFloat, isInt, sumList, maxList, printAll
+from functionalities import addTransaction, printList, findTransactions, removeFiltred
+from utils import isFloat, isInt, sumList, maxList, printAll, remove
 
 
 def initTransList(l):
@@ -154,16 +154,10 @@ def uiFilter(l, params):
         return
 
     if len(params) == 2:
-        params[1] = isFloat(params[1])
+        params[1] = isInt(params[1])
         if (params[0] in ["in", 'out']) and params[1] != False:
             l_filter = findTransactions(l, params)
 
-            i = 0
-            while i < len(l):
-                if l[i] not in l_filter:
-                    remove(l, l[i])
-                else:
-                    i = i + 1
         else:
             print("Wrong number of parameters!!! Required usage: filter <type> or filter <type> <day>\n")
             return
@@ -171,28 +165,24 @@ def uiFilter(l, params):
         if params[0] in ["in", 'out']:
             l_filter = findTransactions(l, params)
 
-            i = 0
-            while i < len(l):
-                if l[i] not in l_filter:
-                    remove(l, l[i])
-                else:
-                    i = i + 1
-
         else:
             print("Wrong number of parameters!!! Required usage: filter <type> or filter <type> <day>\n")
             return
 
+    removeFiltred(l, l_filter)
+    print("Successfully removed!")
+
 def uiUndo(l, undo_l):
     if len(undo_l) >= 2:
-        l = deepcopy(undo_l[len(undo_l) - 2])
+        l[:] = deepcopy(undo_l[len(undo_l) - 2])
         remove(undo_l, undo_l[len(undo_l) - 1])
     else:
-        l = []
-        undo_l = []
+        l[:] = []
+        undo_l[:] = []
 
 def uiListTransactions(l, params):
     if len(params)>2:
-        print("Invalid no of parameters!!!")
+        print("Invalid number of parameters!!!")
     if len(params)==0:
         print("The current list of transactions is:")
 
